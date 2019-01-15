@@ -1,0 +1,14 @@
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\TheCartelKataTests.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\TheCartelKataTests.pdb
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\obj\Debug\TheCartelKataTests.csprojAssemblyReference.cache
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\obj\Debug\TheCartelKataTests.csproj.CoreCompileInputs.cache
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\obj\Debug\TheCartelKataTests.csproj.CopyComplete
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\obj\Debug\TheCartelKataTests.dll
+C:\Users\bbdnet1593\source\repos\TheCartelKata\TheCartelKataTests\obj\Debug\TheCartelKataTests.pdb
