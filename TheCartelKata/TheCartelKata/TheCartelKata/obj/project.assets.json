@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bbdnet1859\\Downloads\\TheCartelKata\\TheCartelKata\\TheCartelKata\\TheCartelKata.csproj",
+      "projectUniqueName": "C:\\Users\\bbdnet1859\\Documents\\Dojo\\Code\\TheCartelKata\\TheCartelKata\\TheCartelKata\\TheCartelKata.csproj",
       "projectName": "TheCartelKata",
-      "projectPath": "C:\\Users\\bbdnet1859\\Downloads\\TheCartelKata\\TheCartelKata\\TheCartelKata\\TheCartelKata.csproj",
+      "projectPath": "C:\\Users\\bbdnet1859\\Documents\\Dojo\\Code\\TheCartelKata\\TheCartelKata\\TheCartelKata\\TheCartelKata.csproj",
       "packagesPath": "C:\\Users\\bbdnet1859\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bbdnet1859\\Downloads\\TheCartelKata\\TheCartelKata\\TheCartelKata\\obj\\",
+      "outputPath": "C:\\Users\\bbdnet1859\\Documents\\Dojo\\Code\\TheCartelKata\\TheCartelKata\\TheCartelKata\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -20,3 +20,14 @@ C:\Users\bbdnet1859\Downloads\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debu
 C:\Users\bbdnet1859\Downloads\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.AssemblyInfo.cs
 C:\Users\bbdnet1859\Downloads\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.dll
 C:\Users\bbdnet1859\Downloads\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.pdb
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\bin\Debug\netcoreapp2.1\TheCartelKata.deps.json
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\bin\Debug\netcoreapp2.1\TheCartelKata.runtimeconfig.json
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\bin\Debug\netcoreapp2.1\TheCartelKata.runtimeconfig.dev.json
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\bin\Debug\netcoreapp2.1\TheCartelKata.dll
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\bin\Debug\netcoreapp2.1\TheCartelKata.pdb
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.csprojAssemblyReference.cache
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.csproj.CoreCompileInputs.cache
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.AssemblyInfoInputs.cache
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.AssemblyInfo.cs
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.dll
+C:\Users\bbdnet1859\Documents\Dojo\Code\TheCartelKata\TheCartelKata\TheCartelKata\obj\Debug\netcoreapp2.1\TheCartelKata.pdb

@@ -89,7 +89,60 @@ namespace TheCartelKata
             public abstract int AreaSize { get; set; }
             public abstract string DrugProduction { get; }
             public abstract int ProducedInAMonth { get; }
+            public abstract double Worth { get; }
             public abstract double CalcAmount(double timeInMonths);
+            public abstract double AmountStored { get; set; }
+            public abstract double CalcWorth();
+        }
+
+        abstract class Distribution
+        {
+            protected Distribution distributor;
+
+            public void SetChain(Distribution distributor)
+            {
+                this.distributor = distributor;
+            }
+
+            public abstract void ProcessSale(Production production);
+        }
+
+        class StreetDealer : Distribution
+        {
+            public override void ProcessSale(Production production)
+            {
+                if (production.CalcWorth() < 1000)
+                {
+                    Console.WriteLine("Sale will be handled by a street dealer");
+                }
+                else if (distributor != null)
+                {
+                    distributor.ProcessSale(production);
+                }
+            }
+        }
+
+        class Distributor : Distribution
+        {
+            public override void ProcessSale(Production production)
+            {
+                if (production.CalcWorth() < 10000)
+                {
+                    Console.WriteLine("Sale will be handled by a distributor");
+                }
+                else if (distributor != null)
+                {
+                    distributor.ProcessSale(production);
+                }
+            }
+        }
+
+        class KingPin : Distribution
+        {
+            public override void ProcessSale(Production production)
+            {
+                Console.WriteLine("Sale will be handled by a king pin");
+            }
         }
 
         class Rural : Production
@@ -101,7 +154,12 @@ namespace TheCartelKata
 
             public override double CalcAmount(double timeInMonths)
             {
-                return ProducedInAMonth * AreaSize / timeInMonths;
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                return AmountStored * Worth;
             }
 
             public override string AreaType => "Rural";
@@ -111,14 +169,24 @@ namespace TheCartelKata
             public override string DrugProduction => "Marijuana";
 
             public override int ProducedInAMonth => 10;
+
+            public override double AmountStored { get; set; }
+
+            public override double Worth => 100;
         }
 
         class Jungle : Production
         {
-            public Jungle(int AreaSize)
+            public Jungle(int AreaSize, string Type, string Size)
             {
                 this.AreaSize = AreaSize;
+                this.Type = Type;
+                this.Size = Size;
             }
+
+            public string Type { get; set; }
+
+            public string Size { get; set; }
 
             public override string AreaType => "Jungle";
 
@@ -128,9 +196,38 @@ namespace TheCartelKata
 
             public override int ProducedInAMonth => 200;
 
+            //Not sure about this, I don't need Worth for this drug, should I remove it from the abstract class?
+            public override double Worth { get; }
+
+            public override double AmountStored { get; set; }
+
             public override double CalcAmount(double timeInMonths)
             {
-                return ProducedInAMonth * AreaSize / timeInMonths;
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                if (Type == "Raw")
+                {
+                    return 10000 * AmountStored;
+                }
+                else
+                {
+                    switch (Size)
+                    {
+                        case "Light":
+                            return AmountStored * 12000;
+
+                        case "Medium":
+                            return AmountStored * 14000;
+
+                        case "Heavy":
+                            return AmountStored * 16000;
+                        default:
+                            return 0;
+                    }
+                }
             }
         }
 
@@ -149,24 +246,43 @@ namespace TheCartelKata
 
             public override int ProducedInAMonth => 20;
 
+            public override double Worth => 10;
+
+            public override double AmountStored { get; set; }
+
             public override double CalcAmount(double timeInMonths)
             {
-                return ProducedInAMonth * AreaSize / timeInMonths;
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                return Worth * AmountStored;
             }
         }
 
         private static void Main()
         {
+            Distribution streetDealer = new StreetDealer();
+            Distribution distributor = new Distributor();
+            Distribution kingPin = new KingPin();
+
+            streetDealer.SetChain(distributor);
+            distributor.SetChain(kingPin);
+
             double timeInMonths = 0.5;
             List<Production> productionSites = new List<Production>();
-            productionSites.Add(new Rural(10));
-            productionSites.Add(new Jungle(10));
+            productionSites.Add(new Rural(1));
+            productionSites.Add(new Jungle(10, "Cut", "Heavy"));
             productionSites.Add(new Urban(10));
 
             foreach (var item in productionSites)
             {
-                double test = item.CalcAmount(timeInMonths);
+                item.AmountStored = item.CalcAmount(timeInMonths);
+                streetDealer.ProcessSale(item);
             }
+
+            Console.ReadLine();
         }
     }
 }
