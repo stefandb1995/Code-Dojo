@@ -270,15 +270,16 @@ namespace TheCartelKata
             streetDealer.SetChain(distributor);
             distributor.SetChain(kingPin);
 
-            double timeInMonths = 0.5;
+            double timeInMonths = 1;
             List<Production> productionSites = new List<Production>();
             productionSites.Add(new Rural(1));
-            productionSites.Add(new Jungle(10, "Cut", "Heavy"));
-            productionSites.Add(new Urban(10));
+            productionSites.Add(new Jungle(1, "Cut", "Heavy"));
+            productionSites.Add(new Urban(1));
 
             foreach (var item in productionSites)
             {
                 item.AmountStored = item.CalcAmount(timeInMonths);
+                Console.Write(item.AmountStored.ToString());
                 streetDealer.ProcessSale(item);
             }
 
