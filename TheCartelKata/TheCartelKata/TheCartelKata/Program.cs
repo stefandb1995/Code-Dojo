@@ -11,11 +11,11 @@ namespace TheCartelKata
      *      3. Distribution
      * of the following drugs
      *  Marijuana
-     *      Morthern Lights
-     *      Purple Haze
-     *      White Widow
+     *      Morthern Lights ($70/kg)
+     *      Purple Haze ($100/kg)
+     *      White Widow ($125/kg)
      *  Cocaine
-     *      % different purities
+     *      % different purities (multiply with the value to get final value)
      *          high 90%
      *          medium 75%
      *          low 60%
@@ -83,18 +83,205 @@ namespace TheCartelKata
 
     internal class Program
     {
+        #region Drugs
+        abstract class Drugs
+        {
+            public abstract double Worth { get; set; }
+        }
+
+        class Marijuana : Drugs
+        {
+            public enum Type
+            {
+                MorthernLights,
+                PurpleHaze,
+                WhiteWidow
+            }
+
+            public override double Worth { get; set; }
+
+            public Marijuana(Type type)
+            {
+                switch (type)
+                {
+                    case Type.MorthernLights:
+                        Worth = 70;
+                        break;
+                    case Type.PurpleHaze:
+                        Worth = 100;
+                        break;
+                    case Type.WhiteWidow:
+                        Worth = 125;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        class Cocaine : Drugs
+        {
+            public override double Worth { get; set; }
+
+            public enum Type
+            {
+                Raw,
+                Cut
+            }
+
+            public enum Size
+            {
+                Small,
+                Medium,
+                Large
+            }
+
+            public Cocaine(Type type, Size size, double purity)
+            {
+                Worth = CalcWorth(type, size, purity);
+            }
+
+            public double CalcWorth(Type type, Size size, double purity)
+            {
+                int worth = 0;
+                switch (type)
+                {
+                    case Type.Raw:
+                        worth = 10000;
+                        break;
+                    case Type.Cut:
+                        switch (size)
+                        {
+                            case Size.Small:
+                                worth = 12000;
+                                break;
+                            case Size.Medium:
+                                worth = 14000;
+                                break;
+                            case Size.Large:
+                                worth = 16000;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return worth * purity / 100;
+            }
+        }
+
+        class MDMA : Drugs
+        {
+            public override double Worth { get; set; }
+
+            public MDMA()
+            {
+                Worth = 10;
+            }
+        }
+        #endregion
+
+        #region Production
         abstract class Production
         {
-            public abstract string AreaType { get; }
+            public string AreaName { get; set; }
             public abstract int AreaSize { get; set; }
-            public abstract string DrugProduction { get; }
+            public abstract Drugs DrugProduction { get; set; }
             public abstract int ProducedInAMonth { get; }
-            public abstract double Worth { get; }
             public abstract double CalcAmount(double timeInMonths);
             public abstract double AmountStored { get; set; }
             public abstract double CalcWorth();
         }
 
+        class Rural : Production
+        {
+            public Rural(string propertyName, int AreaSize, Marijuana.Type type)
+            {
+                this.AreaName = propertyName;
+                this.DrugProduction = new Marijuana(type);
+                this.AreaSize = AreaSize;
+            }
+
+            public override double CalcAmount(double timeInMonths)
+            {
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                return AmountStored * DrugProduction.Worth;
+            }
+
+            public override int AreaSize { get; set; }
+
+            public override Drugs DrugProduction { get; set; }
+
+            public override int ProducedInAMonth => 10;
+
+            public override double AmountStored { get; set; }
+        }
+
+        class Jungle : Production
+        {
+            public Jungle(string propertyName, int AreaSize, Cocaine.Type Type, Cocaine.Size Size, double Purity)
+            {
+                this.AreaName = propertyName;
+                this.AreaSize = AreaSize;
+                this.DrugProduction = new Cocaine(Type, Size, Purity);
+            }
+
+            public override int AreaSize { get; set; }
+
+            public override Drugs DrugProduction { get; set; }
+
+            public override int ProducedInAMonth => 200;
+
+            public override double AmountStored { get; set; }
+
+            public override double CalcAmount(double timeInMonths)
+            {
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                return DrugProduction.Worth * AmountStored;
+            }
+        }
+
+        class Urban : Production
+        {
+            public Urban(string propertyName, int AreaSize)
+            {
+                this.AreaName = propertyName;
+                this.AreaSize = AreaSize;
+                this.DrugProduction = new MDMA();
+            }
+
+            public override int AreaSize { get; set; }
+
+            public override Drugs DrugProduction { get; set; }
+
+            public override int ProducedInAMonth => 20;
+
+            public override double AmountStored { get; set; }
+
+            public override double CalcAmount(double timeInMonths)
+            {
+                return ProducedInAMonth * AreaSize * timeInMonths;
+            }
+
+            public override double CalcWorth()
+            {
+                return DrugProduction.Worth * AmountStored;
+            }
+        }
+
+        #endregion
+
+        #region Distribution
         abstract class Distribution
         {
             protected Distribution distributor;
@@ -113,7 +300,7 @@ namespace TheCartelKata
             {
                 if (production.CalcWorth() < 1000)
                 {
-                    Console.WriteLine("Sale will be handled by a street dealer");
+                    Console.WriteLine($"Property is worth $ {production.CalcWorth()}, sale will be handled by a street dealer");
                 }
                 else if (distributor != null)
                 {
@@ -128,7 +315,7 @@ namespace TheCartelKata
             {
                 if (production.CalcWorth() < 10000)
                 {
-                    Console.WriteLine("Sale will be handled by a distributor");
+                    Console.WriteLine($"Property is worth $ {production.CalcWorth()}, sale will be handled by a distributor");
                 }
                 else if (distributor != null)
                 {
@@ -141,125 +328,11 @@ namespace TheCartelKata
         {
             public override void ProcessSale(Production production)
             {
-                Console.WriteLine("Sale will be handled by a king pin");
+                Console.WriteLine($"Property is worth $ {production.CalcWorth()}, sale will be handled by a king pin");
             }
         }
 
-        class Rural : Production
-        {
-            public Rural(int AreaSize)
-            {
-                this.AreaSize = AreaSize;
-            }
-
-            public override double CalcAmount(double timeInMonths)
-            {
-                return ProducedInAMonth * AreaSize * timeInMonths;
-            }
-
-            public override double CalcWorth()
-            {
-                return AmountStored * Worth;
-            }
-
-            public override string AreaType => "Rural";
-
-            public override int AreaSize { get; set; }
-
-            public override string DrugProduction => "Marijuana";
-
-            public override int ProducedInAMonth => 10;
-
-            public override double AmountStored { get; set; }
-
-            public override double Worth => 100;
-        }
-
-        class Jungle : Production
-        {
-            public Jungle(int AreaSize, string Type, string Size)
-            {
-                this.AreaSize = AreaSize;
-                this.Type = Type;
-                this.Size = Size;
-            }
-
-            public string Type { get; set; }
-
-            public string Size { get; set; }
-
-            public override string AreaType => "Jungle";
-
-            public override int AreaSize { get; set; }
-
-            public override string DrugProduction => "Cocaine";
-
-            public override int ProducedInAMonth => 200;
-
-            //Not sure about this, I don't need Worth for this drug, should I remove it from the abstract class?
-            public override double Worth { get; }
-
-            public override double AmountStored { get; set; }
-
-            public override double CalcAmount(double timeInMonths)
-            {
-                return ProducedInAMonth * AreaSize * timeInMonths;
-            }
-
-            public override double CalcWorth()
-            {
-                if (Type == "Raw")
-                {
-                    return 10000 * AmountStored;
-                }
-                else
-                {
-                    switch (Size)
-                    {
-                        case "Light":
-                            return AmountStored * 12000;
-
-                        case "Medium":
-                            return AmountStored * 14000;
-
-                        case "Heavy":
-                            return AmountStored * 16000;
-                        default:
-                            return 0;
-                    }
-                }
-            }
-        }
-
-        class Urban : Production
-        {
-            public Urban(int AreaSize)
-            {
-                this.AreaSize = AreaSize;
-            }
-
-            public override string AreaType => "Urban";
-
-            public override int AreaSize { get; set; }
-
-            public override string DrugProduction => "MDMA";
-
-            public override int ProducedInAMonth => 20;
-
-            public override double Worth => 10;
-
-            public override double AmountStored { get; set; }
-
-            public override double CalcAmount(double timeInMonths)
-            {
-                return ProducedInAMonth * AreaSize * timeInMonths;
-            }
-
-            public override double CalcWorth()
-            {
-                return Worth * AmountStored;
-            }
-        }
+        #endregion
 
         private static void Main()
         {
@@ -272,14 +345,15 @@ namespace TheCartelKata
 
             double timeInMonths = 1;
             List<Production> productionSites = new List<Production>();
-            productionSites.Add(new Rural(1));
-            productionSites.Add(new Jungle(1, "Cut", "Heavy"));
-            productionSites.Add(new Urban(1));
+            productionSites.Add(new Rural("Property 1", 10, Marijuana.Type.MorthernLights));
+            productionSites.Add(new Jungle("Property 2", 1, Cocaine.Type.Cut, Cocaine.Size.Large, 50));
+            productionSites.Add(new Urban("Property 3", 1));
 
             foreach (var item in productionSites)
             {
                 item.AmountStored = item.CalcAmount(timeInMonths);
-                Console.Write(item.AmountStored.ToString());
+                Console.Write(item.AreaName + " creates ");
+                Console.Write(item.AmountStored.ToString() + ". ");
                 streetDealer.ProcessSale(item);
             }
 
