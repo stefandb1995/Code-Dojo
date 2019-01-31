@@ -1,0 +1,7 @@
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\bin\Debug\kataBattleShip.exe.config
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\bin\Debug\kataBattleShip.exe
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\bin\Debug\kataBattleShip.pdb
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\obj\Debug\kataBattleShip.csprojAssemblyReference.cache
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\obj\Debug\kataBattleShip.csproj.CoreCompileInputs.cache
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\obj\Debug\kataBattleShip.exe
+C:\Users\bbdnet1859\Documents\Visual Studio 2017\Projects\kataBattleShip\kataBattleShip\obj\Debug\kataBattleShip.pdb

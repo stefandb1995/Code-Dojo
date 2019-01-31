@@ -209,10 +209,7 @@ namespace TheCartelKata
                 return ProducedInAMonth * AreaSize * timeInMonths;
             }
 
-            public override double CalcWorth()
-            {
-                return AmountStored * DrugProduction.Worth;
-            }
+            public override double CalcWorth() => AmountStored * DrugProduction.Worth;
 
             public override int AreaSize { get; set; }
 
